@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Night Battle</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🌙 Night Battle</h1>
+  </header>
+  <main>
+    <p>Monsters are attacking!</p>
+    <div id="fight"></div>
+    <div id="weapons"></div>
+  </main>
+
+  <audio id="sfx-attack" src="assets/attack.mp3"></audio>
+  <audio id="sfx-hit" src="assets/hit.mp3"></audio>
+
+  <script>
+    let monsters=3;
+    let lives=parseInt(localStorage.getItem("lives")||"3");
+
+    function update(){
+      document.getElementById("fight").innerText=`Monsters left: ${monsters}`;
+      if(monsters<=0){
+        alert("You survived the night!");
+        localStorage.setItem("day","true");
+        window.location.href="index.html";
+      }
+    }
+
+    function attack(){
+      if(monsters>0){
+        monsters--;
+        playSound("sfx-attack");
+        update();
+      }
+    }
+
+    function monsterAttack(){
+      if(monsters>0){
+        lives--;
+        localStorage.setItem("lives",lives);
+        playSound("sfx-hit");
+        if(lives<=0){
+          alert("You were defeated!");
+          localStorage.clear();
+          window.location.href="index.html";
+        }
+      }
+    }
+
+    const w=getWeapons();
+    const wepDiv=document.getElementById("weapons");
+    if(w.length===0){
+      alert("You have no weapons! The monsters overwhelm you...");
+      lives=0; localStorage.setItem("lives",0);
+      window.location.href="index.html";
+    } else {
+      w.forEach(item=>{
+        const btn=document.createElement("button");
+        btn.innerText=`Use ${item}`;
+        btn.onclick=attack;
+        wepDiv.appendChild(btn);
+      });
+    }
+
+    setInterval(monsterAttack,3000);
+    update();
+  </script>
+</body>
+</html>

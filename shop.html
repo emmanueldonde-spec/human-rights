@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🛒 Shop</h1>
+    <a href="index.html">⬅️ Back</a>
+  </header>
+  <main>
+    <h2>Buy Weapons</h2>
+    <button onclick="buy('Sword',50)">Sword (50 coins)</button>
+    <button onclick="buy('Shield',70)">Shield (70 coins)</button>
+    <button onclick="buy('Bow',100)">Bow (100 coins)</button>
+    <div id="status"></div>
+  </main>
+
+  <audio id="sfx-coin" src="assets/coins.mp3"></audio>
+
+  <script>
+    function buy(item,cost){
+      let c=getCoins();
+      if(c>=cost){
+        setCoins(c-cost);
+        addWeapon(item);
+        playSound("sfx-coin");
+        alert(`You bought a ${item}!`);
+        window.location.reload();
+      } else {
+        alert("Not enough coins!");
+      }
+    }
+    document.getElementById("status").innerText =
+      `Coins: ${getCoins()} | Weapons: ${getWeapons().join(", ")||"none"}`;
+  </script>
+</body>
+</html>

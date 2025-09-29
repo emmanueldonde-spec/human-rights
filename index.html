@@ -7,24 +7,26 @@
   <script src="script.js" defer></script>
 </head>
 <body>
-  <header>
-    <h1>🌍 Human Rights Quest</h1>
-    <nav>
-      <a href="home.html">🏠 Home</a>
-      <a href="shop.html">🛒 Shop</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Road</h2>
-    <p>Choose a compound to enter:</p>
-    <div class="compound-list">
-      <button onclick="enterCompound(0)">Compound 1</button>
-      <button onclick="enterCompound(1)">Compound 2</button>
-      <button onclick="enterCompound(2)">Compound 3</button>
-      <button onclick="enterCompound(3)">Compound 4</button>
+  <div id="game">
+    <div id="world">
+      <img id="bg" src="assets/bg.png" alt="Background">
+      <div id="road"></div>
+      <img id="player" src="assets/player.png" alt="Player">
+      
+      <!-- Buildings -->
+      <img class="building compound" data-id="0" src="assets/compound.png" style="left:600px;top:260px;">
+      <img class="building compound" data-id="1" src="assets/compound.png" style="left:1200px;top:280px;">
+      <img class="building" id="shop" src="assets/shop.png" style="left:1800px;top:250px;">
+      <img class="building" id="home" src="assets/home.png" style="left:2400px;top:270px;">
     </div>
-    <div id="status"></div>
-  </main>
+  </div>
+
+  <!-- Sound effects -->
+  <audio id="sfx-correct" src="assets/correct.mp3"></audio>
+  <audio id="sfx-wrong" src="assets/wrong.mp3"></audio>
+  <audio id="sfx-hit" src="assets/hit.mp3"></audio>
+  <audio id="sfx-attack" src="assets/attack.mp3"></audio>
+  <audio id="sfx-footstep" src="assets/footstep.mp3"></audio>
+  <audio id="sfx-coin" src="assets/coins.mp3"></audio>
 </body>
 </html>

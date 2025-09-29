@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>🏠 Home</h1>
+    <a href="index.html">⬅️ Back</a>
+  </header>
+  <main>
+    <p>Rest to restore lives.</p>
+    <button onclick="rest()">Rest</button>
+    <div id="status"></div>
+  </main>
+
+  <audio id="sfx-correct" src="assets/correct.mp3"></audio>
+
+  <script>
+    function rest(){
+      localStorage.setItem("lives",3);
+      playSound("sfx-correct");
+      alert("You feel refreshed. Lives restored!");
+      window.location.reload();
+    }
+    document.getElementById("status").innerText =
+      `Lives: ${localStorage.getItem("lives")}`;
+  </script>
+</body>
+</html>
